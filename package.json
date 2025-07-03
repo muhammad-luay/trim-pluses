@@ -1,0 +1,47 @@
+{
+  "name": "trim-pluses",
+  "displayName": "Trim Pluses",
+  "description": "Remove leading + signs from selected lines or the whole file.",
+  "version": "0.0.1",
+  "publisher": "muhammadluay",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onCommand:trim-pluses.trimPluses"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "trim-pluses.trimPluses",
+        "title": "Trim leading + signs"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "trim-pluses.trimPluses",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "trim-pluses.trimPluses",
+        "key": "shift+alt+t",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "compile": "npm run build"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.87.0",
+    "esbuild": "^0.21.0",
+    "typescript": "^5.5.0"
+  }
+}
