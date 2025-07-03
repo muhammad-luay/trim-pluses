@@ -4,6 +4,11 @@
   "description": "Remove leading + signs from selected lines or the whole file.",
   "version": "0.0.1",
   "publisher": "muhammadluay",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muhammad-luay/trim-pluses.git"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.87.0"
   },

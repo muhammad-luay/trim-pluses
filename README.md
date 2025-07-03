@@ -23,6 +23,11 @@ To activate the extension:
 
 2. Type and select `Trim Pluses: Trim Pluses`.
 
+### Using Keyboard Shortcut:
+
+- **macOS**: `Shift + Option + T`
+- **Windows/Linux**: `Shift + Alt + T`
+
 This will remove all leading `+` characters from the selected lines or the entire document if nothing is selected.
 
 ---
