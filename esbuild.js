@@ -2,6 +2,7 @@ const esbuild = require("esbuild");
 
 const production = process.argv.includes('--production');
 const watch = process.argv.includes('--watch');
+const isWeb = process.argv.includes('--web');
 
 /**
  * @type {import('esbuild').Plugin}
@@ -24,24 +25,35 @@ const esbuildProblemMatcherPlugin = {
 };
 
 async function main() {
-	const ctx = await esbuild.context({
-		entryPoints: [
-			'src/extension.ts'
-		],
+	const baseConfig = {
+		entryPoints: ['src/extension.ts'],
 		bundle: true,
-		format: 'cjs',
 		minify: production,
 		sourcemap: !production,
 		sourcesContent: false,
-		platform: 'node',
-		outfile: 'dist/extension.js',
 		external: ['vscode'],
 		logLevel: 'silent',
-		plugins: [
-			/* add to the end of plugins array */
-			esbuildProblemMatcherPlugin,
-		],
-	});
+		plugins: [esbuildProblemMatcherPlugin],
+	};
+
+	const nodeConfig = {
+		...baseConfig,
+		format: 'cjs',
+		platform: 'node',
+		outfile: 'dist/extension.js',
+	};
+
+	const webConfig = {
+		...baseConfig,
+		format: 'cjs',
+		platform: 'browser',
+		outfile: 'dist/web/extension.js',
+		target: ['es2020'],
+	};
+
+	const config = isWeb ? webConfig : nodeConfig;
+	const ctx = await esbuild.context(config);
+	
 	if (watch) {
 		await ctx.watch();
 	} else {
